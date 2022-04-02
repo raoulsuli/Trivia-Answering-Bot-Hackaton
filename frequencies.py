@@ -8,14 +8,18 @@ def compute_freqs(text):
     freqs = {}
     for item in word_bigrams_res:
         bigr = item[0] + ' ' + item[1]
+        revBigr = item[1] + ' ' + item[0]
         if bigr in freqs:
             freqs[bigr] += 1
+        elif revBigr in freqs:
+            freqs[revBigr] += 1
         else:
             freqs[bigr] = 1
+
     return freqs
 
-query = "What's the name of Simba's nasty uncle in Lion King?"
-terms = "Simba"
+query = "What is the capital city of Romania?"
+terms = "Romania Bucharest"
 
 data = get_data(query, terms)
 freqs = compute_freqs(data)
