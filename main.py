@@ -1,9 +1,17 @@
 import sys, requests, os
 from googlesearch import search
 from bs4 import BeautifulSoup
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 
-query = sys.argv[1]
+query = "Who is the president of the United States"
 
+question_text = ""
+question_type = ""
+question_category = ""
+answer_choices = []
+answer_type = ""
 idx = 0
 
 def write_to_file(idx, text):
@@ -21,3 +29,12 @@ for url in search(query, num = 10, stop = 10, pause = 2):
     write_to_file(idx, result)
 
     idx += 1
+
+
+
+nltk.download('stopwords')
+stop_words = set(stopwords.words('english'))
+print(stop_words)
+# total_words = query.split()
+# total_word_length = len(total_words)
+# print(total_word_length)
