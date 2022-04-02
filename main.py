@@ -126,4 +126,3 @@ for filename in os.listdir("output/"):
     #         print(propozitie)
     idx += 1
 print(who_is())
- 

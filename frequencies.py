@@ -1,4 +1,5 @@
 import nltk
+from nltk.corpus import stopwords
 from google_search import get_data
 from nltk import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -18,7 +19,11 @@ def compute_freqs(text):
             freqs[bigr] = 1
     return freqs
 
-data = get_data(query = "Who is the lead singer of band Vita de vie?", terms = "lead singer")
+
+nltk.download('stopwords')
+stop_words = set(stopwords.words('english'))
+
+data = get_data(query="Which ocean is Bermuda in?", terms="ocean Bermuda")
 freqs = compute_freqs(data)
 
 print(dict(sorted(freqs.items(), key=lambda item: item[1])))
