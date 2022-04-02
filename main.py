@@ -13,11 +13,9 @@ answer_choices = []
 answer_type = ""
 idx = 0
 
-<<<<<<< Updated upstream
 NUM_PAGES = 10
 
 for url in search(query, num = NUM_PAGES, stop = NUM_PAGES, pause = 2):
-=======
 #lista bigrame care contin substantive
 words = nltk.word_tokenize(query)
 tagged_words = nltk.pos_tag(words)
@@ -36,7 +34,6 @@ print(final_bigrams)
 #print(soup.prettify())
 
 for url in search(query, num = 1, stop = 1, pause = 2):
->>>>>>> Stashed changes
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
 
