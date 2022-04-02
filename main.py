@@ -4,7 +4,11 @@ from bs4 import BeautifulSoup
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
+<<<<<<< Updated upstream
 query = sys.argv[1]
+=======
+query = "Who is the lead singer of band Vita de vie?"
+>>>>>>> Stashed changes
 
 question_text = ""
 question_type = ""
