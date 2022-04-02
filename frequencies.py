@@ -19,7 +19,7 @@ def compute_freqs(text):
     return freqs
 
 query = "What is the capital city of Romania?"
-terms = "Romania Bucharest"
+terms = "Capital City"
 
 data = get_data(query, terms)
 freqs = compute_freqs(data)
