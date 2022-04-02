@@ -35,5 +35,3 @@ def get_data(query, terms):
         chars = f'{re.escape(punctuation)}”'
         output.append(re.sub(r'['+chars+']', '', text).split())
     return " ".join(flatten(output))
-
-get_data()
