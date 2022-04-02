@@ -13,7 +13,9 @@ answer_choices = []
 answer_type = ""
 idx = 0
 
-for url in search(query, num = 1, stop = 1, pause = 2):
+NUM_PAGES = 10
+
+for url in search(query, num = NUM_PAGES, stop = NUM_PAGES, pause = 2):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
 
@@ -21,8 +23,10 @@ for url in search(query, num = 1, stop = 1, pause = 2):
     
     if not os.path.exists("output"):
         os.mkdir("output")
+
+    os.remove(f"output/{idx}.txt")
+
     f = open(f"output/{idx}.txt", 'a')
-    f.truncate()
 
     for rr in result:
         f.write(rr.get_text())
