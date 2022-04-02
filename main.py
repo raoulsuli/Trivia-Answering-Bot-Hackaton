@@ -5,6 +5,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 query = sys.argv[1]
+NUM_PAGES = 1
 
 question_text = ""
 question_type = ""
@@ -13,7 +14,7 @@ answer_choices = []
 answer_type = ""
 idx = 0
 
-for url in search(query, num = 1, stop = 1, pause = 2):
+for url in search(query, num = NUM_PAGES, stop = NUM_PAGES, pause = 2):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
 
