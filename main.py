@@ -15,7 +15,6 @@ idx = 0
 
 NUM_PAGES = 10
 
-for url in search(query, num = NUM_PAGES, stop = NUM_PAGES, pause = 2):
 #lista bigrame care contin substantive
 words = nltk.word_tokenize(query)
 tagged_words = nltk.pos_tag(words)
@@ -33,7 +32,7 @@ for item in nouns_bi:
 print(final_bigrams)
 #print(soup.prettify())
 
-for url in search(query, num = 1, stop = 1, pause = 2):
+for url in search(query, num=NUM_PAGES, stop=NUM_PAGES, pause=2):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
 
