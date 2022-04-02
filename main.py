@@ -39,11 +39,6 @@ for item in nouns_bi:
 #print(soup.prettify())
 print(final_bigrams)
 
-for url in search(query, num=NUM_PAGES, stop=NUM_PAGES, pause=2):
-    # if "ro." in url or ".ro" in url:
-    #     NUM_PAGES += 1
-    #     continue
-
 answer_docs = []
 
 for url in search(query, num = 30, stop = 30, pause = 2):
