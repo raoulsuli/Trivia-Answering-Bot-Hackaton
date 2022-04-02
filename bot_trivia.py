@@ -17,6 +17,7 @@ urls = []
 for j in search(query, tld="co.in", num=3, stop=3, pause=2):
     urls.append(j)
 
+
 #lista care contine toate substantivele
 nouns = []
 r = requests.get(urls[0])
@@ -24,7 +25,7 @@ for word,pos in nltk.pos_tag(nltk.word_tokenize(str(query))):
     if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
         nouns.append(word)
 
-#lista bigrame care contin substantive
+#lista de bigrame care contin substantive
 words = nltk.word_tokenize(query)
 tagged_words = nltk.pos_tag(words)
 word_pairs = list(nltk.bigrams(tagged_words))
@@ -33,10 +34,10 @@ for bigram in word_pairs:
 	if bigram[0][1].startswith('N') or bigram[1][1].startswith('N'):
 		nouns_bi.append(bigram)
 
-#soup = BeautifulSoup(r.content, 'html5lib')
-#print(nouns_bi)
 final_bigrams = []
 for item in nouns_bi:
 	final_bigrams.append(item[0][0] + ' ' + item[1][0])
-print(final_bigrams)
-#print(soup.prettify())
+res_bigrams = []
+for item in final_bigrams:
+	res_bigrams.append(item.split())
+print(res_bigrams)
