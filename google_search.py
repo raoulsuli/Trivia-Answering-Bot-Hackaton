@@ -8,7 +8,7 @@ def flatten(t):
 def get_data(query, terms):
 
     # get the API KEY here: https://developers.google.com/custom-search/v1/overview
-    API_KEY = "AIzaSyDUB5AoQ9HclzvVz9khCYy9m4brjAkWlLM"
+    API_KEY = "AIzaSyBhCgIZg7Dws2uciAPnh2F8J7KyMTShi8Q"
     # get your Search Engine ID on your CSE control panel
     SEARCH_ENGINE_ID = "e504c2a0af6824094"
 
