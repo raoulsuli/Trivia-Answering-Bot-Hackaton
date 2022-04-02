@@ -1,5 +1,6 @@
 import requests, re
 from string import punctuation
+from nltk.corpus import stopwords
 
 def flatten(t):
     return [item for sublist in t for item in sublist]
@@ -7,7 +8,7 @@ def flatten(t):
 def get_data(query, terms):
 
     # get the API KEY here: https://developers.google.com/custom-search/v1/overview
-    API_KEY = "AIzaSyBhCgIZg7Dws2uciAPnh2F8J7KyMTShi8Q"
+    API_KEY = "AIzaSyDUB5AoQ9HclzvVz9khCYy9m4brjAkWlLM"
     # get your Search Engine ID on your CSE control panel
     SEARCH_ENGINE_ID = "e504c2a0af6824094"
 
@@ -31,7 +32,17 @@ def get_data(query, terms):
     for i, search_item in enumerate(search_items, start=1):
         title = search_item.get("title")
         snippet = search_item.get("snippet")
-        text = f'{title} {snippet}'
-        chars = f'{re.escape(punctuation)}”'
+        text = f'{title} {snippet}'.lower()
+        chars = f'{re.escape(punctuation)}”'.replace("'", "")
         output.append(re.sub(r'['+chars+']', '', text).split())
-    return " ".join(flatten(output))
+
+    stopwordsList = stopwords.words('english')
+    terms = [item.lower() for item in query.split()]
+
+    res = []
+
+    for item in flatten(output):
+        if item not in list(terms) and item not in stopwordsList:
+            res.append(item)
+
+    return " ".join(res)
