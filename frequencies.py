@@ -1,5 +1,5 @@
 import nltk
-from scrape import get_data
+from google_search import get_data
 
 def compute_freqs(text):
     newText = " ".join([item for item in text.split() if "'" not in item])
@@ -18,8 +18,14 @@ def compute_freqs(text):
 
     return freqs
 
-def return_answer(query, terms):
+def return_answer(query, choices, terms):
     data = get_data(query, terms)
     freqs = compute_freqs(data)
-    return max(freqs, key=freqs.get)
+    if not choices:
+        return max(freqs, key=freqs.get)
+    else:
+        sorted_dict = dict(sorted(freqs.items(), key=lambda item: item[1], reverse=True))
+        for key in list(sorted_dict.keys()):
+            if key in choices:
+                return key
 

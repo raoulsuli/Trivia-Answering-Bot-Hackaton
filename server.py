@@ -1,7 +1,7 @@
 from urllib import response
 import flask
 from flask import jsonify, request
-from frequencies_google import return_answer
+from frequencies import return_answer
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -15,10 +15,12 @@ def check_sanity():
 @app.route('/question', methods=['POST'])
 def question():
     question_contents = request.get_json()
+    question_text = question_contents.get('question_text')
+    choices = [item.lower() for item in question_contents.get('answer_choices')]
     answer = jsonify({
-        "answer": return_answer(question_contents.get('question_text'), "")
+        "answer": return_answer(question_contents.get('question_text'), choices, "")
     })
     answer.status_code=200
     return answer
 
-app.run('''host="0.0.0.0",'''port=8000)
+app.run(port=8000)
