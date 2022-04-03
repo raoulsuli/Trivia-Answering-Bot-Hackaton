@@ -4,9 +4,9 @@ from word2number import w2n
 
 def convert_num(num):
     try:
-        return w2n.word_to_num(num)
+        return str(w2n.word_to_num(num))
     except Exception:
-        return num
+        return str(num)
 
 def has_numbers(inputString):
     return all(char.isdigit() for char in inputString)
@@ -50,6 +50,9 @@ def return_answer(query, choices, answer_type, terms):
     else:
         sorted_dict = dict(sorted(freqs.items(), key=lambda item: item[1], reverse=True))
         for key in list(sorted_dict.keys()):
-            if key in choices:
-                return key
+            for choice in choices:
+                if choice.isnumeric() and choice == key:
+                    return choice
+                elif not choice.isnumeric() and choice in key:
+                    return choice
         return max(freqs, key=freqs.get)

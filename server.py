@@ -28,4 +28,4 @@ def question():
     answer.status_code=200
     return answer
 
-app.run(port=8000)
+app.run(host="0.0.0.0", port=8000)
