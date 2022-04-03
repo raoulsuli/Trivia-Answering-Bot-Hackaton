@@ -18,9 +18,22 @@ def compute_freqs(text):
 
     return freqs
 
-def return_answer(query, choices, terms):
+def compute_freqs_one(text):
+    newText = " ".join([item for item in text.split() if "'" not in item])
+    words_res = nltk.word_tokenize(newText)
+    freqs = {}
+    for item in words_res:
+        bigr = item
+        if bigr in freqs:
+            freqs[bigr] += 1
+        else:
+            freqs[bigr] = 1
+
+    return freqs
+
+def return_answer(query, choices, answer_type, terms):
     data = get_data(query, terms)
-    freqs = compute_freqs(data)
+    freqs = compute_freqs(data) if answer_type == 'text' else compute_freqs_one(data)
     if not choices:
         return max(freqs, key=freqs.get)
     else:

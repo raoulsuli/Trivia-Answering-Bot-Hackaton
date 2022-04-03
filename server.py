@@ -17,8 +17,9 @@ def question():
     question_contents = request.get_json()
     question_text = question_contents.get('question_text')
     choices = [item.lower() for item in question_contents.get('answer_choices')]
+    answer_type = question_contents.get('answer_type')
     answer = jsonify({
-        "answer": return_answer(question_contents.get('question_text'), choices, "")
+        "answer": return_answer(question_contents.get('question_text'), choices, answer_type, "")
     })
     answer.status_code=200
     return answer
