@@ -21,7 +21,5 @@ def compute_freqs(text):
 def return_answer(query, terms):
     data = get_data(query, terms)
     freqs = compute_freqs(data)
-    # return max(freqs, key=freqs.get)
-    print(dict(sorted(freqs.items(), key=lambda item: item[1])))
+    return max(freqs, key=freqs.get)
 
-return_answer("What is the capital city of Romania?", "")
