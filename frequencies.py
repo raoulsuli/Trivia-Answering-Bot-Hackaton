@@ -1,5 +1,12 @@
 import nltk
 from google_search import get_data
+from word2number import w2n
+
+def convert_num(num):
+    try:
+        return w2n.word_to_num(num)
+    except Exception:
+        return num
 
 def has_numbers(inputString):
     return all(char.isdigit() for char in inputString)
@@ -22,7 +29,8 @@ def compute_freqs(text):
     return freqs
 
 def compute_freqs_one(text):
-    newText = " ".join([item for item in text.split() if "'" not in item and has_numbers(item) == True])
+    textWithoutNumwords = " ".join([convert_num(item) for item in text.split()])
+    newText = " ".join([item for item in textWithoutNumwords.split() if "'" not in item and has_numbers(item) == True])
     words_res = nltk.word_tokenize(newText)
     freqs = {}
     for item in words_res:
@@ -44,4 +52,4 @@ def return_answer(query, choices, answer_type, terms):
         for key in list(sorted_dict.keys()):
             if key in choices:
                 return key
-
+        return max(freqs, key=freqs.get)
