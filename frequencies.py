@@ -1,6 +1,9 @@
 import nltk
 from google_search import get_data
 
+def has_numbers(inputString):
+    return all(char.isdigit() for char in inputString)
+
 def compute_freqs(text):
     newText = " ".join([item for item in text.split() if "'" not in item])
     words_res = nltk.word_tokenize(newText)
@@ -19,7 +22,7 @@ def compute_freqs(text):
     return freqs
 
 def compute_freqs_one(text):
-    newText = " ".join([item for item in text.split() if "'" not in item])
+    newText = " ".join([item for item in text.split() if "'" not in item and has_numbers(item) == True])
     words_res = nltk.word_tokenize(newText)
     freqs = {}
     for item in words_res:
