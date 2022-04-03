@@ -2,6 +2,14 @@ from urllib import response
 import flask
 from flask import jsonify, request
 from frequencies import return_answer
+import nltk
+
+def extract_key_words(query): #remove daca nu merge
+	key_words = []
+	for word,pos in nltk.pos_tag(nltk.word_tokenize(query)):
+		if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
+			key_words.append(word)
+	return " ".join(key_words)
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -20,7 +28,7 @@ def question():
     answer_type = question_contents.get('answer_type')
     firstQ = question_text.split()[0]
     whoWhereType = True if firstQ == 'Who' or firstQ == 'Where' else False
-    ret_ans = return_answer(question_contents.get('question_text'), choices, answer_type, "")
+    ret_ans = return_answer(question_text, choices, answer_type, extract_key_words(question_text))
     ret_ans_formatted = ret_ans.title() if whoWhereType else ret_ans
     answer = jsonify({
         "answer": ret_ans_formatted
