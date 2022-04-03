@@ -1,5 +1,5 @@
 import requests, re
-from string import punctuation
+import string
 from nltk.corpus import stopwords
 
 def flatten(t):
@@ -33,7 +33,7 @@ def get_data(query, terms):
         title = search_item.get("title")
         snippet = search_item.get("snippet")
         text = f'{title} {snippet}'.lower()
-        chars = f'{re.escape(punctuation)}”'.replace("'", "")
+        chars = f'{re.escape(string.punctuation)}”'.replace("'", "")
         output.append(re.sub(r'['+chars+']', '', text).split())
 
     query = query.translate(str.maketrans('', '', string.punctuation))
