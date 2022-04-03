@@ -36,6 +36,7 @@ def get_data(query, terms):
         chars = f'{re.escape(punctuation)}”'.replace("'", "")
         output.append(re.sub(r'['+chars+']', '', text).split())
 
+    query = query.translate(str.maketrans('', '', string.punctuation))
     stopwordsList = stopwords.words('english')
     terms = [item.lower() for item in query.split()]
 
