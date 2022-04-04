@@ -1,10 +1,9 @@
+import flask, nltk
 from urllib import response
-import flask
 from flask import jsonify, request
 from frequencies import return_answer
-import nltk
 
-def extract_key_words(query): #remove daca nu merge
+def extract_key_words(query):
 	key_words = []
 	for word,pos in nltk.pos_tag(nltk.word_tokenize(query)):
 		if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
